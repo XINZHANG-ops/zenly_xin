@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="UserLocation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tip-x7-ZvC">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="myLat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rqK-uv-1WP">
+                                <rect key="frame" x="63" y="179" width="274" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="separatorColor"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="myLong" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcY-Mx-qyT">
+                                <rect key="frame" x="63" y="215" width="274" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="separatorColor"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZu-Tp-Dem">
+                                <rect key="frame" x="179" y="715" width="42" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="house"/>
+                                <connections>
+                                    <action selector="ifCenter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2Qa-kw-mHg"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRx-Fe-xR7">
+                                <rect key="frame" x="63" y="150" width="274" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zhe-DI-2Qi">
+                                <rect key="frame" x="50" y="721" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Tip-x7-ZvC" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="52v-ne-496"/>
+                            <constraint firstItem="Tip-x7-ZvC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="BSs-fa-kR4"/>
+                            <constraint firstItem="Tip-x7-ZvC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="CSR-p3-nfc"/>
+                            <constraint firstAttribute="bottom" secondItem="Tip-x7-ZvC" secondAttribute="bottom" id="SXV-ri-p2V"/>
+                            <constraint firstItem="Tip-x7-ZvC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="b0o-6X-pA9"/>
+                            <constraint firstAttribute="bottom" secondItem="Tip-x7-ZvC" secondAttribute="bottom" id="jYf-LU-jpg"/>
+                            <constraint firstItem="Tip-x7-ZvC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kdf-26-xrj"/>
+                            <constraint firstAttribute="bottom" secondItem="Tip-x7-ZvC" secondAttribute="bottom" id="nAx-CZ-DFp"/>
+                            <constraint firstItem="Tip-x7-ZvC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="tuo-Qf-wnx"/>
+                            <constraint firstItem="Tip-x7-ZvC" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="w9z-x0-yxI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="ifCenterBotton" destination="IZu-Tp-Dem" id="YT0-MT-r4u"/>
+                        <outlet property="ifSendData" destination="Zhe-DI-2Qi" id="v14-c2-l38"/>
+                        <outlet property="mapView" destination="Tip-x7-ZvC" id="uq3-7D-gCH"/>
+                        <outlet property="myHeading" destination="cRx-Fe-xR7" id="YmF-ry-qyw"/>
+                        <outlet property="myLat" destination="rqK-uv-1WP" id="NQb-6c-JU5"/>
+                        <outlet property="myLong" destination="gcY-Mx-qyT" id="aGE-bR-NhK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="32.824427480916029" y="-27.464788732394368"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="house" width="170.66667175292969" height="170.66667175292969"/>
+        <systemColor name="separatorColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
