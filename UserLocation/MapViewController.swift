@@ -12,7 +12,7 @@ import Firebase
 import FirebaseDatabase
 
 
-class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     let locationManager = CLLocationManager()
     var currentAnnotation:AnnotationPin!
     
@@ -25,6 +25,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         centerMyView()
     }
     
+    @IBAction func ifShowLandmark(_ sender: Any) {
+        createLandMark()
+    }
     @IBOutlet weak var showFetch: UILabel!
     
     //    @IBAction func ifFetch(_ sender: Any) {
@@ -56,11 +59,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         locationManager.headingFilter = 10
         locationManager.startUpdatingHeading()
         locationManager.startUpdatingLocation()
-        //        mapView.setUserTrackingMode(.followWithHeading, animated: false)
         mapView.showsUserLocation = true
         mapView.showsCompass = true
         mapView.showsScale = true
-        // mapView.mapType = .satellite
+
+        
+
 //        let trackingButton = MKUserTrackingButton(mapView: mapView)
 //        trackingButton.layer.backgroundColor = UIColor(white: 1, alpha: 0.8).cgColor
 //        trackingButton.layer.borderColor = UIColor.white.cgColor
@@ -77,11 +81,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 //        NSLayoutConstraint.activate(trackingButtonConstraints)
         
         
-//        let walmartPin = MKPointAnnotation(__coordinate: CLLocationCoordinate2D(latitude: 43.47029077475355, longitude: -80.51586408851273), title: "walwart", subtitle: "walwart")
-//
-//        var currentPin = AnnotationPin(coordinate: mapView.userLocation.coordinate, title: "walwart", subtitle: "walwart", image: UIImage(named: "huihui")!)
-//        mapView.addAnnotation(walmartPin)
-//        mapView.addAnnotation(currentPin)
+        
 
     }
     
@@ -103,14 +103,30 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     
     // this add own pic as the pin
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//        let annotationView = MKAnnotationView(annotation: currentAnnotation, reuseIdentifier: "MyLoc")
+//        annotationView.image = UIImage(named: "huihui")
+//        let transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
+//        annotationView.transform = transform
+//        return annotationView
+//    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotationView = MKAnnotationView(annotation: currentAnnotation, reuseIdentifier: "MyLoc")
-        annotationView.image = UIImage(named: "huihui")
-        let transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
-        annotationView.transform = transform
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "AnnotationView")
+        
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "AnnotationView")
+        }
+        if let title = annotation.title, title == "walmart" {
+            annotationView?.image = UIImage(named: "arrow")
+        } else if annotation === mapView.userLocation {
+            annotationView?.image = UIImage(named: "huihui")
+        }
+        
+        annotationView?.canShowCallout = true
+        
         return annotationView
     }
-    
     
     // this update info from current location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -136,9 +152,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         for view in views {
             // Add a scaling and position animation to the annotation view
             let scale = CAKeyframeAnimation(keyPath: "transform.scale")
-            scale.values = [0.3, 0.4, 0.3]
+            scale.values = [0.3, 0.35, 0.3]
             scale.keyTimes = [0, 0.5, 1]
-            scale.duration = 1
+            scale.duration = 2
             scale.repeatCount = .infinity
             scale.timingFunctions = [CAMediaTimingFunction(name: .easeInEaseOut)]
             view.layer.add(scale, forKey: "scale")
@@ -180,38 +196,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         ])
     }
     
-    //    func createLandMark() {
-    //        let ref = Database.database().reference(withPath: "walmart")
-    //
-    //        ref.observe(.value, with: {
-    //            snapshot in
-    //            let value = snapshot.value as! NSDictionary
-    //            let latitude = value["latitude"] ?? ""
-    //            let longitude = value["longitude"] ?? ""
-    //            self.landmarkpin.coordinate = CLLocationCoordinate2D(latitude: latitude as! CLLocationDegrees, longitude: longitude as! CLLocationDegrees)
-    //            self.landmarkpin.image = UIImage(named: "arrow")
-    //        })
-    //        mapView.addAnnotation(landmarkpin)
-    //
-    //
-    //        showFetch.text = timeRef.
-    //    }
+        func createLandMark() {
+            let ref = Database.database().reference(withPath: "walmart")
     
-    
-    
-    
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        if let circleOverlay = overlay as? MKCircle {
-            let circleRenderer = MKCircleRenderer(overlay: circleOverlay)
-            circleRenderer.fillColor = UIColor.red.withAlphaComponent(0.1)
-            circleRenderer.strokeColor = UIColor.red
-            circleRenderer.lineWidth = 1
-            return circleRenderer
-            }
-
-            return MKOverlayRenderer()
-            }
-
-            
+            ref.observe(.value, with: {
+                snapshot in
+                let value = snapshot.value as! NSDictionary
+                let latitude = value["latitude"] ?? ""
+                let longitude = value["longitude"] ?? ""
+                let walmartPin = AnnotationPin(coordinate: CLLocationCoordinate2D(latitude: latitude as! CLLocationDegrees, longitude: longitude as! CLLocationDegrees), title: "walmart", subtitle: "walmart", image: UIImage(named: "arrow")!)
+                self.mapView.addAnnotation(walmartPin)
+            })
+        }
     
 }
